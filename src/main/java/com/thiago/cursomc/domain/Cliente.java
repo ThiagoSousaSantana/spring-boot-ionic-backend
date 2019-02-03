@@ -2,6 +2,7 @@ package com.thiago.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thiago.cursomc.domain.enums.TipoCliente;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class Cliente implements Serializable {
     private Integer id;
     private String nome;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 100)
     private String email;
     private String cpfOuCnpj;
     private Integer tipoCliente;
