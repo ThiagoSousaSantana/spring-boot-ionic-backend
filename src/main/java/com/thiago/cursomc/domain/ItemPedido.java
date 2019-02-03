@@ -2,6 +2,7 @@ package com.thiago.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -39,8 +40,16 @@ public class ItemPedido implements Serializable {
         return this.id.getPedido();
     }
 
+    public void setPedido(Pedido pedido){
+        id.setPedido(pedido);
+    }
+
     public Produto getProduto(){
         return this.id.getProduto();
+    }
+
+    public void setProduto(Produto produto){
+        this.id.setProduto(produto);
     }
 
     public ItemPedidoPK getId() {
