@@ -3,6 +3,7 @@ package com.thiago.cursomc.config;
 import com.thiago.cursomc.services.DBService;
 import com.thiago.cursomc.services.EmailService;
 import com.thiago.cursomc.services.MockEmailService;
+import com.thiago.cursomc.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -27,5 +28,10 @@ public class DevConfig {
         if ("create".equals(strategy))
             dbService.instantiateDataBase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
     }
 }
