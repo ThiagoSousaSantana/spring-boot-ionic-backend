@@ -1,12 +1,15 @@
 package com.thiago.cursomc.config;
 
 import com.thiago.cursomc.services.DBService;
+import com.thiago.cursomc.services.EmailService;
+import com.thiago.cursomc.services.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import javax.validation.constraints.Email;
 import java.text.ParseException;
 
 @Configuration
@@ -23,7 +26,6 @@ public class DevConfig {
     public boolean instantiateDatabase() throws ParseException {
         if ("create".equals(strategy))
             dbService.instantiateDataBase();
-
         return true;
     }
 }
