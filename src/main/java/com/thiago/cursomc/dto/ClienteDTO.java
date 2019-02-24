@@ -1,5 +1,6 @@
 package com.thiago.cursomc.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thiago.cursomc.domain.Cliente;
 import com.thiago.cursomc.services.validation.ClienteUpdate;
 import org.hibernate.validator.constraints.Length;
@@ -22,6 +23,10 @@ public class ClienteDTO implements Serializable {
     @Email(message = "Email invalido")
     private String email;
 
+    @JsonIgnore
+    @NotEmpty
+    private String senha;
+
     public ClienteDTO() {
     }
 
@@ -29,6 +34,7 @@ public class ClienteDTO implements Serializable {
         this.id = obj.getId();
         this.email = obj.getEmail();
         this.nome = obj.getNome();
+        this.senha = obj.getSenha();
     }
 
     public Integer getId() {
@@ -53,5 +59,13 @@ public class ClienteDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
