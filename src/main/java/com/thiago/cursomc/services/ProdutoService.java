@@ -37,4 +37,8 @@ public class ProdutoService {
 		return repository.search(nome, categorias, pageRequest);
 	}
 
+	public List<Produto> findAll(){
+		return repository.findAll();
+	}
+
 }

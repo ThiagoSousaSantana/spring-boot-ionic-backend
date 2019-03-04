@@ -2,6 +2,7 @@ package com.thiago.cursomc.services;
 
 import com.thiago.cursomc.domain.*;
 import com.thiago.cursomc.domain.enums.EstadoPagamento;
+import com.thiago.cursomc.domain.enums.Perfil;
 import com.thiago.cursomc.domain.enums.TipoCliente;
 import com.thiago.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,16 +104,23 @@ public class DBService {
         estadoRepository.saveAll(Arrays.asList(est1,est2));
         cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
 
-        Cliente cli1 = new Cliente(null, "Maria Silva", "thiago91098@gmail.com",
+        Cliente cli1 = new Cliente(null, "Maria Silva", "teste@gmail.com",
                 "35135135155", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
 
+        Cliente cli2 = new Cliente(null, "Thiago Sousa", "thiago91098@gmail.com",
+                "38493285030", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
+
+        cli2.addPerfil(Perfil.ADMIN);
+
         cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+        cli2.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 
         Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "3820834", c1, cli1);
         Endereco e2 = new Endereco(null, "Avenida Matos", "150", "Sala 800", "Centro", "45665412", c2, cli1);
+        Endereco e3 = new Endereco(null, "Av. Blabla", "3", "Sala 80", "Rocinha", "45665412", c2, cli2);
 
-        clienteRepository.save(cli1);
-        enderecoRepository.saveAll(Arrays.asList(e1,e2));
+        clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+        enderecoRepository.saveAll(Arrays.asList(e1,e2, e3));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);

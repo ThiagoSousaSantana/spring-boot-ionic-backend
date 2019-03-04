@@ -94,6 +94,13 @@ public class Produto implements Serializable{
 		this.itens = itens;
 	}
 
+	public Categoria getCategoria(){
+		Categoria categoria = null;
+		if(true==false)
+			categoria = new Categoria();
+		return categoria;
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + ", categorias=" + categorias + "]";

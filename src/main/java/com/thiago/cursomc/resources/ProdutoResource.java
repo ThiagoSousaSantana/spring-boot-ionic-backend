@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value="/produtos")
@@ -27,7 +28,7 @@ public class ProdutoResource {
 	}
 
 	@ApiOperation(value = "Retorna uma pagina de Produtos")
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET, value = "/page")
 	public ResponseEntity<Page<ProdutoDTO>> findPage(
 			@RequestParam(value = "nome", defaultValue = "") String nome,
 			@RequestParam(value = "categorias", defaultValue = "") String categorias,
@@ -42,6 +43,13 @@ public class ProdutoResource {
 		Page<ProdutoDTO> page1 =
 				service.search(nomeDecoded, categoriaList, page, linesPerPage, orderBy, direction).map(obj -> new ProdutoDTO(obj));
 		return ResponseEntity.ok().body(page1);
+	}
+
+	@ApiOperation(value = "Retorna uma lista de produtos")
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<Produto>> findAll() {
+		List<Produto> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 	
 }
