@@ -1,6 +1,10 @@
 package com.thiago.cursomc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.databind.ser.DefaultSerializerProvider;
+import com.fasterxml.jackson.databind.ser.SerializerFactory;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.thiago.cursomc.domain.PagamentoComBoleto;
 import com.thiago.cursomc.domain.PagamentoComCartao;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +20,11 @@ public class JacksonConfig {
             public void configure(ObjectMapper objectMapper) {
                 objectMapper.registerSubtypes(PagamentoComCartao.class);
                 objectMapper.registerSubtypes(PagamentoComBoleto.class);
+
+                DefaultSerializerProvider provider = new DefaultSerializerProvider.Impl();
+                provider.setNullValueSerializer(new NullSerializer());
+                objectMapper.setSerializerProvider(provider);
+
                 super.configure(objectMapper);
             };
         };
